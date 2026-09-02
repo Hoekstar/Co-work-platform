@@ -7,10 +7,11 @@ This file is the shared coordination point for Codex, Claude Code, and human col
 Status: VRIJ
 Active worker: -
 Started at: -
-Scope: NKC website MVP - ingelogde gebruiker
+Scope: 1-op-1 implementatie van ingelogde gebruiker-schermen voor NKC website MVP
 Figma source: https://www.figma.com/design/G9gU3FfCD6Z3QP4v7ovOMG/NKC---website--MVP-?node-id=12259-13388&p=f&t=addaYu7TgtPqalxJ-0
-Last handoff: Initial setup
-Next step: Import or scaffold the project code, then implement the logged-in user flow from the Figma frame.
+Local Figma export: C:\Users\Dave Hoekstra\Downloads\NKC - website (MVP).fig
+Last handoff: Codex verified the downloaded `.fig` file exists, contains `canvas.fig`, `meta.json`, `thumbnail.png`, and image assets, and confirmed `canvas.fig` is Figma's binary `fig-kiwij` format. The earlier rough prototype direction was stopped and must not be used as the basis for the 1-op-1 build.
+Next step: Extract or obtain exact logged-in user frame screenshots/assets, then scaffold the app from those frames only.
 
 ## Status Values
 
@@ -42,3 +43,5 @@ When handing off:
 ## Current Figma Focus
 
 For now, ignore the rest of the Figma file and focus on the logged-in user experience from the linked frame/node.
+
+Do not implement public homepage, login flow, or unrelated Figma pages unless Dave explicitly expands the scope.
