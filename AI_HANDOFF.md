@@ -7,11 +7,11 @@ This file is the shared coordination point for Codex, Claude Code, and human col
 Status: WACHT_OP_REVIEW
 Active worker: -
 Started at: 2026-09-02
-Scope: Leverancier/adviseur-weergave met bedrijfsomschrijving en dossierinformatie
+Scope: NKC-chatbericht toevoegen en goedgekeurde dossieruitbreiding vastleggen in een aparte commit
 Figma source: https://www.figma.com/design/WVizuI3oPeVXgfbhcjtXBM/Untitled?node-id=1-10093&t=brIwuh83IK5bnliV-0
 Local Figma export: C:\Users\Dave Hoekstra\Downloads\NKC - website (MVP).fig
-Last handoff: Codex verving de ingelogde-gebruikerinhoud door een leverancier/adviseur-weergave met bedrijfsomschrijving, dossier `1116103`, huidige situatie, gewenste situatie en contactpersonen. Oude shortlist-, match- en interviewsecties zijn verwijderd. Browsercontrole en `npm run build` slagen.
-Next step: Review de nieuwe view op http://127.0.0.1:5173/. Verbind daarna desgewenst de dossier- en bedrijfsinhoud met echte data.
+Last handoff: Codex heeft een zichtbaar NKC-antwoord toegevoegd aan het besloten overleg: de functionele briefing mag gedeeld worden; commerciële afspraken en interne notities blijven bij NKC. De build en visuele controle zijn geslaagd. De volledige goedgekeurde uitbreiding wordt nu als aparte commit vastgelegd.
+Next step: Dave kan deze commit beoordelen of teruggrijpen op de eerdere basiscommit. Pushen gebeurt alleen na een expliciete keuze van Dave.
 
 ## Status Values
 

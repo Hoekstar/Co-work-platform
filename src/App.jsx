@@ -2,12 +2,16 @@ import { useState } from "react";
 import {
   ArrowRight,
   BriefcaseBusiness,
+  CheckCircle2,
   ChevronDown,
   ChevronRight,
   ClipboardList,
+  Clock3,
+  FileText,
   Globe2,
   Heart,
   Landmark,
+  ListTodo,
   Mail,
   MapPin,
   Menu,
@@ -17,6 +21,7 @@ import {
   Send,
   Share2,
   Star,
+  Users,
   UsersRound,
 } from "lucide-react";
 
@@ -34,6 +39,25 @@ function Header() {
     <div className="topbar"><div className="topbar-inner"><span><ClipboardList size={13} /> 11.433 organisaties gratis gematched</span><span><Star size={13} /> 9,2 uit 2100+ reviews</span><span><Landmark size={13} /> 15+ jaar echte praktijkervaring</span><span><Heart size={13} /> Favorieten</span></div></div>
     <header className="site-header"><div className="header-inner"><button className="menu-button" type="button"><Menu size={20} /> <span>Menu</span></button><a className="nkc-logo" href="#top" aria-label="Nederlands KennisCentrum"><strong>NKC</strong><span>Nederlands<br />KennisCentrum</span></a><button className="user-menu" type="button"><span className="user-dot">M</span><span>Martin Bronger<br /><small>ABCm</small></span><ChevronDown size={15} /></button></div></header>
   </>;
+}
+
+function WorkspaceControls({ mode, onModeChange }) {
+  return <section className="workspace-controls" aria-label="Dossierregie en voortgang">
+    <div className="regie-choice">
+      <span>Regie</span>
+      <div className="segmented-control" role="group" aria-label="Kies de regievorm">
+        <button className={mode === "eigen" ? "selected" : ""} type="button" onClick={() => onModeChange("eigen")}>Eigen regie</button>
+        <button className={mode === "nkc" ? "selected" : ""} type="button" onClick={() => onModeChange("nkc")}>NKC regie</button>
+      </div>
+    </div>
+    <div className="process-steps" aria-label="Voortgang van het dossier">
+      <span className="done"><CheckCircle2 size={17} /> Intake</span>
+      <span className="active"><Clock3 size={17} /> Marktscan</span>
+      <span>Kennismakingen</span>
+      <span>Besluit</span>
+    </div>
+    <p className="regie-explanation">{mode === "eigen" ? "De klant beheert de longlist en shortlist. NKC bewaakt afspraken en helpt waar nodig." : "NKC beheert de longlist en shortlist. De klant beoordeelt en bevestigt de vervolgstappen."}</p>
+  </section>;
 }
 
 function ProfileCard() {
@@ -57,17 +81,51 @@ function DossierCard() {
   const [open, setOpen] = useState(true);
   return <section className={`dossier-card ${open ? "open" : ""}`}>
     <button className="dossier-header" type="button" onClick={() => setOpen(!open)} aria-expanded={open}><span>Dossier 1116103</span><ChevronDown size={20} /></button>
-    {open && <div className="dossier-content"><p className="dossier-date">donderdag 4 juli 2020</p><section><h2>Huidige situatie</h2><p>De activiteit van dit bedrijf bestaat uit een groothandel voor klimwand benodigdheden voor winkels, klimhallen, defensie enz. Naast de verkoop van artikelen verrichten ze ook onderhoud en advies. Momenteel gebruiken ze enkel Exact Online voor de boekhouding en missen ze inzicht in taken, voorraden wat ze willen aanpassen door aanschaf van een ERP systeem.</p></section><section><h2>Gewenste situatie</h2><p>Ze ontwerpen zelf items welke ze bij externe laten produceren, de productie hoeft niet in het systeem. Ze hebben een artikel en een gebruiksvoorraad waar ze graag inzicht en planning willen hebben. Voor de losse verkoop hebben ze een webshop, voor de projecten waar ze de uren en materialen en onderdelen willen ze graag de orderstatus van items kunnen plannen en de uren kunnen bijhouden. Middels CRM functionaliteiten willen ze aanvragen en klantgedrag kunnen monitoren. Ze doen vooral zaken in Nederland en Belgie en hebben 1 NL administratie te voeren.</p><p>De pijnpunten welke de kernselectiepunten zijn:<br />- Inzicht in huidige statussen<br />- Taken zijn momenteel niet te volgen<br />- Voorraad bijhouden</p><p>Het bijhouden van de certificering en onderhoud in het ERP systeem zou handig zijn maar is geen harde wens, dit doen ze nu in excel.</p><p>Ze hanteren geen kleur/maattabellen, enkel artikelnummers.</p></section></div>}
+    {open && <div className="dossier-content"><p className="dossier-date">donderdag 4 juli 2020</p><section><h2>Huidige situatie</h2><p>De activiteit van dit bedrijf bestaat uit een groothandel voor klimwand benodigdheden voor winkels, klimhallen, defensie enz. Naast de verkoop van artikelen verrichten ze ook onderhoud en advies. Momenteel gebruiken ze enkel Exact Online voor de boekhouding en missen ze inzicht in taken, voorraden wat ze willen aanpassen door aanschaf van een ERP systeem.</p></section><section><h2>Gewenste situatie</h2><p>Ze ontwerpen zelf items welke ze bij externe laten produceren, de productie hoeft niet in het systeem. Ze hebben een artikel en een gebruiksvoorraad waar ze graag inzicht en planning willen hebben. Voor de losse verkoop hebben ze een webshop, voor de projecten waar ze de uren en materialen en onderdelen willen ze graag de orderstatus van items kunnen plannen en de uren kunnen bijhouden. Middels CRM functionaliteiten willen ze aanvragen en klantgedrag kunnen monitoren. Ze doen vooral zaken in Nederland en Belgie en hebben 1 NL administratie te voeren.</p><p>De pijnpunten welke de kernselectiepunten zijn:<br />- Inzicht in huidige statussen<br />- Taken zijn momenteel niet te volgen<br />- Voorraad bijhouden</p><p>Het bijhouden van de certificering en onderhoud in het ERP systeem zou handig zijn maar is geen harde wens, dit doen ze nu in excel.</p><p>Ze hanteren geen kleur/maattabellen, enkel artikelnummers.</p></section><section className="match-profile"><div><h2>Matchprofiel</h2><span>Alleen voor matching</span></div><p>Samenvatting van het klant-DNA en de voorwaarden voor een passende oplossing.</p><dl><div><dt>Oplossingsrichting</dt><dd>ERP met voorraad, projectplanning en CRM</dd></div><div><dt>Harde voorwaarde</dt><dd>Nederlandse administratie en ondersteuning</dd></div><div><dt>Belangrijk in de match</dt><dd>Inzicht in statussen, taken en voorraad</dd></div></dl></section></div>}
   </section>;
 }
 
-function MainContent() {
-  return <div className="left-column"><ProfileCard /><DossierCard /></div>;
+function CollaborationCard() {
+  const [composerOpen, setComposerOpen] = useState(false);
+  const [recipient, setRecipient] = useState("aanvrager");
+  return <section className="collaboration-card">
+    <div className="collaboration-heading"><div><h2>Dossiergesprekken</h2><p>Vragen en antwoorden rond dossier 1116103.</p></div><button className="outline-button compact-action" type="button" onClick={() => setComposerOpen((isOpen) => !isOpen)}><MessageSquare size={17} /> {composerOpen ? "Sluiten" : "Nieuwe vraag"}</button></div>
+    <section className="dossier-questions" aria-label="Dossiergesprekken">
+      <div className="questions-heading"><div><h3>Gesprek met de aanvrager</h3><p><span className="participant-stack"><span>H</span><span>K</span><span>N</span></span> HUSS, Klimwandspecialist en NKC</p></div><span className="conversation-presence">3 deelnemers</span></div>
+      <article className="conversation-thread">
+        <div className="conversation-message outgoing"><span className="message-avatar">H</span><div><div className="message-meta"><b>HUSS</b><time>Vandaag, 10:24</time></div><p>Hoe wordt de voorraad momenteel bijgehouden? En welke informatie is straks nodig voor de planning?</p></div></div>
+        <div className="conversation-message incoming"><span className="message-avatar">K</span><div><div className="message-meta"><b>Klimwandspecialist</b><time>Vandaag, 11:08</time></div><p>We houden voorraad nu in Excel bij. Voor de planning willen we inzicht in artikelen, projecten en bestellingen.</p><span className="message-file"><FileText size={15} /> Huidige situatie.pdf</span></div></div>
+        <div className="conversation-note">Communicatie verloopt via Selectiehulp. Zichtbaar voor aanvrager, leverancier en NKC.</div>
+        <form className="reply-composer" onSubmit={(event) => event.preventDefault()}><label className="sr-only" htmlFor="dossier-reply">Reageer in gesprek met de aanvrager</label><textarea id="dossier-reply" rows="3" placeholder="Schrijf een uitgebreide reactie..." /><div><button className="attachment-button" type="button"><FileText size={16} /> Bijlage</button><button className="primary-button" type="submit"><Send size={16} /> Versturen</button></div></form>
+      </article>
+      <article className="private-conversation"><span className="thread-icon"><MessageSquare size={18} /></span><div><span className="thread-label private-label">Besloten overleg met NKC</span><h4>Welke informatie mogen wij met de aanvrager delen?</h4><div className="private-reply"><div><b>NKC</b><time>Vandaag, 09:16</time></div><p>De functionele briefing mag je delen. Commerciële afspraken en interne notities blijven bij NKC.</p></div><small>Alleen zichtbaar voor leverancier en NKC</small></div><ChevronRight size={18} /></article>
+      {composerOpen && <form className="question-composer" onSubmit={(event) => event.preventDefault()}>
+        <div className="composer-topline"><div><h3>Nieuwe vraag</h3><p>Kies eerst wie deze vraag kan beantwoorden.</p></div><span className="status-chip">Dossier 1116103</span></div>
+        <div className="recipient-toggle" role="group" aria-label="Ontvanger van de vraag"><button className={recipient === "aanvrager" ? "selected" : ""} onClick={() => setRecipient("aanvrager")} type="button">Aan aanvrager</button><button className={recipient === "nkc" ? "selected" : ""} onClick={() => setRecipient("nkc")} type="button">Aan NKC</button></div>
+        <p className="visibility-note">{recipient === "aanvrager" ? "Zichtbaar voor: aanvrager, leverancier en NKC." : "Zichtbaar voor: leverancier en NKC. De aanvrager ziet dit gesprek niet."}</p>
+        <label>Onderwerp<input type="text" placeholder="Waar gaat je vraag over?" /></label>
+        <label>Vraag<textarea rows="3" placeholder={recipient === "aanvrager" ? "Stel je vraag aan de aanvrager..." : "Stel je vraag aan NKC over de aanvrager..."} /></label>
+        <div className="composer-actions"><button className="attachment-button" type="button"><FileText size={16} /> Bijlage toevoegen</button><button className="outline-button" type="button" onClick={() => setComposerOpen(false)}>Annuleren</button><button className="primary-button" type="submit"><Send size={16} /> Vraag versturen</button></div>
+      </form>}
+    </section>
+  </section>;
 }
 
-function Sidebar() {
+function MainContent({ mode }) {
+  return <div className="left-column"><ProfileCard /><DossierCard /><CollaborationCard /></div>;
+}
+
+function Sidebar({ mode }) {
+  const [generalQuestionOpen, setGeneralQuestionOpen] = useState(false);
+  const [readyForMeetings, setReadyForMeetings] = useState(false);
+  const [reminderSent, setReminderSent] = useState(false);
   return <aside className="sidebar advisor-sidebar">
-    <section className="info-card"><div className="side-heading"><h2>Bedrijfsinformatie</h2><ChevronDown size={19} /></div><div className="info-list advisor-info"><span><MapPin size={19} /> Postbus 28, Klimmen</span><a href="https://www.klimwandspecialist.nl"><Globe2 size={19} /> www.klimwandspecialist.nl</a><a href="mailto:fhm@klimwandspecialist.nl"><Mail size={19} /> fhm@klimwandspecialist.nl</a><a href="tel:+31434506004"><Phone size={19} /> (0)43 450 6004</a></div><div className="profile-tools"><button type="button"><MessageSquare size={21} /> Stel een vraag</button><button type="button"><Share2 size={21} /> Deel met collega</button><button type="button"><Heart size={21} /> Maak favoriet</button></div></section>
+    <section className="next-action-card"><div className="side-heading"><h2>Volgende actie</h2><Clock3 size={19} /></div><p>Bevestig de gewenste functionaliteiten</p><dl><div><dt>Eigenaar</dt><dd>{mode === "eigen" ? "Klant" : "NKC"}</dd></div><div><dt>Deadline</dt><dd>Over 8 dagen</dd></div><div><dt>Status</dt><dd><span className="status-chip waiting">Wacht op {mode === "eigen" ? "klant" : "NKC"}</span></dd></div></dl><div className="action-button-row"><button className="outline-button" type="button">Open actie <ArrowRight size={17} /></button><button className={reminderSent ? "reminder-button sent" : "reminder-button"} type="button" onClick={() => setReminderSent(true)}>{reminderSent ? "Herinnering verstuurd" : "Stuur herinnering"}</button></div></section>
+    <section className="dossier-agreements-card"><div className="side-heading"><h2>Afspraken &amp; voortgang</h2><ClipboardList size={19} /></div><dl><div><dt>Huidige fase</dt><dd>Marktscan door NKC</dd></div><div><dt>Communicatie</dt><dd>Via Selectiehulp</dd></div><div><dt>Kennismakingen</dt><dd>NKC plant en begeleidt</dd></div></dl><p>Leveranciers ontvangen alleen de goedgekeurde dossierinformatie.</p></section>
+    <section className="dossier-actions-card"><div className="side-heading"><h2>Dossieracties</h2><ClipboardList size={19} /></div><div className="sidebar-action-list"><article><span className="collab-icon"><MessageCircle size={19} /></span><div><b>Gesprekken</b><p>2 gesprekken vragen om reactie</p><small>Laatste bericht vandaag</small></div><ChevronRight size={18} /></article><article><span className="collab-icon"><FileText size={19} /></span><div><b>Bestanden</b><p>Briefing en huidige situatie</p><small>Alleen zichtbaar voor betrokkenen</small></div><ChevronRight size={18} /></article><article><span className="collab-icon"><Users size={19} /></span><div><b>Volgende afspraak</b><p>Plan een kennismaking</p><small>Nog niet ingepland</small></div><ChevronRight size={18} /></article></div></section>
+    <section className="dossier-update-card"><div className="side-heading"><h2>Dossierupdate</h2><FileText size={19} /></div><p><b>{readyForMeetings ? "Klaar voor kennismakingen" : "Werkversie"}</b><small>Laatst bijgewerkt vandaag om 11:08</small></p><button className={readyForMeetings ? "ready-button active" : "ready-button"} type="button" onClick={() => setReadyForMeetings((ready) => !ready)}>{readyForMeetings ? "Definitieve versie gedeeld" : "Markeer als definitief"}</button><button className="text-action" type="button">Stuur dossierupdate</button></section>
+    <section className="info-card"><div className="side-heading"><h2>Bedrijfsinformatie</h2><ChevronDown size={19} /></div><div className="info-list advisor-info"><span><MapPin size={19} /> Postbus 28, Klimmen</span><a href="https://www.klimwandspecialist.nl"><Globe2 size={19} /> www.klimwandspecialist.nl</a><a href="mailto:fhm@klimwandspecialist.nl"><Mail size={19} /> fhm@klimwandspecialist.nl</a><a href="tel:+31434506004"><Phone size={19} /> (0)43 450 6004</a></div><div className="profile-tools"><button type="button" onClick={() => setGeneralQuestionOpen((isOpen) => !isOpen)}><MessageSquare size={21} /> Algemene vraag</button><button type="button"><Share2 size={21} /> Deel met collega</button><button type="button"><Heart size={21} /> Maak favoriet</button></div></section>
+    {generalQuestionOpen && <section className="general-question-card"><div className="side-heading"><h2>Vraag aan NKC</h2><MessageSquare size={19} /></div><p>Deze vraag staat los van een dossier en is alleen zichtbaar voor jou en NKC.</p><form onSubmit={(event) => event.preventDefault()}><textarea rows="4" placeholder="Stel je algemene vraag..." /><button className="attachment-button" type="button"><FileText size={16} /> Bijlage</button><button className="primary-button" type="submit"><Send size={16} /> Versturen</button></form></section>}
     <section className="contact-card"><h2>Vragen over deze gebruiker?</h2><div><img src="/figma/side-2.png" alt="Dave, client manager NKC" /><span><b>Dave</b><small>Client manager NKC</small></span><a href="mailto:info@nederlandskenniscentrum.nl" className="primary-button compact"><MessageSquare size={20} /> Stel vraag</a></div></section>
     <section className="contacts-card"><div className="side-heading"><h2>Contactpersonen</h2><ChevronDown size={19} /></div><div className="contact-person"><img src="/figma/tab-4.png" alt="Frank Heinemans" /><span><b>Frank Heinemans</b></span><MessageCircle size={22} /></div><div className="contact-person"><img src="/figma/tab-9.png" alt="Pieter Wolbers" /><span><b>Pieter Wolbers</b><small>Adviseur</small></span></div></section>
   </aside>;
@@ -78,5 +136,6 @@ function Footer() {
 }
 
 export function App() {
-  return <div id="top"><Header /><main><div className="breadcrumb"><span>⌂</span><ChevronRight size={14} /> Klimwandspecialist</div><div className="page-grid"><MainContent /><Sidebar /></div></main><Footer /></div>;
+  const [mode, setMode] = useState("eigen");
+  return <div id="top"><Header /><main><div className="breadcrumb"><span>⌂</span><ChevronRight size={14} /> Klimwandspecialist</div><WorkspaceControls mode={mode} onModeChange={setMode} /><div className="page-grid"><MainContent mode={mode} /><Sidebar mode={mode} /></div></main><Footer /></div>;
 }
