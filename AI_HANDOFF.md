@@ -4,14 +4,14 @@ This file is the shared coordination point for Codex, Claude Code, and human col
 
 ## Current Status
 
-Status: VRIJ
+Status: WACHT_OP_REVIEW
 Active worker: -
-Started at: -
-Scope: 1-op-1 implementatie van ingelogde gebruiker-schermen voor NKC website MVP
-Figma source: https://www.figma.com/design/G9gU3FfCD6Z3QP4v7ovOMG/NKC---website--MVP-?node-id=12259-13388&p=f&t=addaYu7TgtPqalxJ-0
+Started at: 2026-09-02
+Scope: 1-op-1 implementatie van de ingelogde gebruikerspagina uit het gekoppelde Figma-bestand
+Figma source: https://www.figma.com/design/WVizuI3oPeVXgfbhcjtXBM/Untitled?node-id=1-10093&t=brIwuh83IK5bnliV-0
 Local Figma export: C:\Users\Dave Hoekstra\Downloads\NKC - website (MVP).fig
-Last handoff: Codex verified the downloaded `.fig` file exists, contains `canvas.fig`, `meta.json`, `thumbnail.png`, and image assets, and confirmed `canvas.fig` is Figma's binary `fig-kiwij` format. The earlier rough prototype direction was stopped and must not be used as the basis for the 1-op-1 build.
-Next step: Extract or obtain exact logged-in user frame screenshots/assets, then scaffold the app from those frames only.
+Last handoff: Codex implemented the Figma page in React/Vite with downloaded Figma assets. Desktop and mobile layouts were checked in a browser, and the favourite state plus accordion sections work. `npm run build` passes.
+Next step: Review the local implementation at http://127.0.0.1:5173/. After approval, continue with the next explicitly scoped Figma page or connect this screen to real API data.
 
 ## Status Values
 
