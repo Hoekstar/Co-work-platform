@@ -7,11 +7,11 @@ This file is the shared coordination point for Codex, Claude Code, and human col
 Status: WACHT_OP_REVIEW
 Active worker: -
 Started at: 2026-09-02
-Scope: 1-op-1 implementatie van de ingelogde gebruikerspagina uit het gekoppelde Figma-bestand
+Scope: Leverancier/adviseur-weergave met bedrijfsomschrijving en dossierinformatie
 Figma source: https://www.figma.com/design/WVizuI3oPeVXgfbhcjtXBM/Untitled?node-id=1-10093&t=brIwuh83IK5bnliV-0
 Local Figma export: C:\Users\Dave Hoekstra\Downloads\NKC - website (MVP).fig
-Last handoff: Codex implemented the Figma page in React/Vite with downloaded Figma assets. Desktop and mobile layouts were checked in a browser, and the favourite state plus accordion sections work. `npm run build` passes.
-Next step: Review the local implementation at http://127.0.0.1:5173/. After approval, continue with the next explicitly scoped Figma page or connect this screen to real API data.
+Last handoff: Codex verving de ingelogde-gebruikerinhoud door een leverancier/adviseur-weergave met bedrijfsomschrijving, dossier `1116103`, huidige situatie, gewenste situatie en contactpersonen. Oude shortlist-, match- en interviewsecties zijn verwijderd. Browsercontrole en `npm run build` slagen.
+Next step: Review de nieuwe view op http://127.0.0.1:5173/. Verbind daarna desgewenst de dossier- en bedrijfsinhoud met echte data.
 
 ## Status Values
 

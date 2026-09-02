@@ -1,0 +1,184 @@
+.advisor-profile .profile-content {
+  padding-bottom: 32px;
+}
+
+.location span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.company-copy {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.company-copy p {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.less-button {
+  min-width: 308px;
+  margin-top: 24px;
+}
+
+.dossier-card,
+.contacts-card {
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 0 #edf1e9;
+}
+
+.dossier-header,
+.side-heading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+}
+
+.dossier-header {
+  min-height: 77px;
+  padding: 24px 32px;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+  font-family: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
+  font-size: 24px;
+  text-align: left;
+}
+
+.dossier-header svg,
+.side-heading svg {
+  color: var(--mint);
+}
+
+.dossier-card.open .dossier-header svg {
+  transform: rotate(180deg);
+}
+
+.dossier-content {
+  display: grid;
+  gap: 42px;
+  padding: 8px 32px 42px;
+}
+
+.dossier-date {
+  font-size: 15px;
+}
+
+.dossier-content section {
+  display: grid;
+  gap: 14px;
+}
+
+.dossier-content h2 {
+  font-size: 22px;
+}
+
+.dossier-content p {
+  max-width: 650px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.advisor-sidebar {
+  gap: 24px;
+}
+
+.side-heading h2 {
+  font-size: 21px;
+}
+
+.advisor-info {
+  margin: 24px 0;
+}
+
+.contacts-card {
+  padding: 24px;
+}
+
+.contacts-card .side-heading {
+  margin-bottom: 24px;
+}
+
+.contact-person {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-person + .contact-person {
+  margin-top: 12px;
+}
+
+.contact-person img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-person span {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+}
+
+.contact-person b {
+  font-size: 15px;
+}
+
+.contact-person small {
+  color: #65807c;
+  font-size: 13px;
+}
+
+.contact-person svg {
+  color: #678781;
+}
+
+@media (max-width: 780px) {
+  .location {
+    flex-wrap: wrap;
+  }
+
+  .company-copy {
+    gap: 15px;
+    margin-top: 22px;
+  }
+
+  .company-copy p,
+  .dossier-content p {
+    font-size: 14px;
+  }
+
+  .less-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dossier-header {
+    min-height: 60px;
+    padding: 18px 16px;
+    font-size: 19px;
+  }
+
+  .dossier-content {
+    gap: 30px;
+    padding: 6px 16px 28px;
+  }
+
+  .dossier-content h2 {
+    font-size: 19px;
+  }
+
+  .contacts-card {
+    padding: 20px;
+  }
+}
