@@ -1,8 +1,5 @@
 .workspace-controls {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 16px 28px;
-  align-items: center;
+  display: block;
   margin: 0 0 28px;
   padding: 18px 24px;
   border: 1px solid var(--line);
@@ -12,16 +9,30 @@
 }
 
 .regie-choice,
+.view-choice,
 .process-steps,
 .regie-explanation {
   display: flex;
   align-items: center;
 }
 
+.workspace-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
 .regie-choice {
   gap: 12px;
   font-family: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
   font-size: 18px;
+}
+
+.view-choice {
+  gap: 10px;
+  font-family: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
+  font-size: 16px;
 }
 
 .segmented-control {
@@ -76,8 +87,7 @@
 }
 
 .regie-explanation {
-  grid-column: 1 / -1;
-  margin: 0;
+  margin: 13px 0 0;
   color: #617b77;
   font-size: 13px;
 }
@@ -401,6 +411,102 @@
 .sidebar-action-list > article > svg {
   flex: 0 0 auto;
   color: #73908a;
+}
+
+.advisor-communication-card {
+  padding-bottom: 8px;
+}
+
+.advisor-applicant-thread,
+.supplier-conversations {
+  padding-top: 21px;
+  border-top: 1px solid var(--line);
+}
+
+.advisor-applicant-thread {
+  display: grid;
+  gap: 12px;
+}
+
+.advisor-applicant-thread .questions-heading,
+.supplier-conversations .questions-heading {
+  margin-bottom: 0;
+}
+
+.advisor-applicant-thread .conversation-message {
+  max-width: 92%;
+}
+
+.supplier-conversations {
+  margin-top: 22px;
+}
+
+.advisor-supplier-row {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+}
+
+.supplier-avatar {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 8px;
+  background: #e7f7f3;
+  color: #067663;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.advisor-supplier-row > div {
+  min-width: 0;
+}
+
+.advisor-supplier-row b,
+.advisor-supplier-row small,
+.advisor-supplier-row p,
+.advisor-supplier-row time {
+  display: block;
+}
+
+.advisor-supplier-row b {
+  font-size: 14px;
+}
+
+.advisor-supplier-row small {
+  margin-top: 2px;
+  color: #087765;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.advisor-supplier-row p {
+  margin-top: 5px;
+  color: #4d6662;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.advisor-supplier-row time {
+  margin-top: 4px;
+  color: #778d89;
+  font-size: 11px;
+}
+
+.advisor-supplier-row .text-action {
+  width: auto;
+  min-height: 32px;
+  padding: 0 8px;
+  color: #087765;
+  white-space: nowrap;
+}
+
+.advisor-supplier-row .text-action svg {
+  vertical-align: middle;
 }
 
 .dossier-questions {
@@ -838,11 +944,12 @@
 }
 
 @media (max-width: 1100px) {
-  .workspace-controls {
-    grid-template-columns: 1fr;
+  .workspace-topline {
+    flex-wrap: wrap;
   }
 
   .process-steps {
+    width: 100%;
     justify-content: flex-start;
   }
 }
@@ -855,6 +962,12 @@
   }
 
   .regie-choice {
+    display: grid;
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .view-choice {
     display: grid;
     gap: 8px;
     font-size: 16px;
@@ -918,6 +1031,17 @@
 
   .question-composer {
     padding: 15px;
+  }
+
+  .advisor-supplier-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .advisor-supplier-row .text-action {
+    grid-column: 2;
+    justify-self: start;
+    padding-left: 0;
   }
 
   .dossier-actions-card,

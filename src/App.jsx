@@ -34,27 +34,30 @@ const companyParagraphs = [
   "Door de onafhankelijke positie kan de organisatie klanten adviseren over verschillende oplossingen en producten zonder gebonden te zijn aan specifieke leveranciers. Dit stelt het bedrijf in staat om naar eigen zeggen een optimale prijs-kwaliteitverhouding te bieden aan hun klanten.",
 ];
 
-function Header() {
+function Header({ audience }) {
   return <>
     <div className="topbar"><div className="topbar-inner"><span><ClipboardList size={13} /> 11.433 organisaties gratis gematched</span><span><Star size={13} /> 9,2 uit 2100+ reviews</span><span><Landmark size={13} /> 15+ jaar echte praktijkervaring</span><span><Heart size={13} /> Favorieten</span></div></div>
-    <header className="site-header"><div className="header-inner"><button className="menu-button" type="button"><Menu size={20} /> <span>Menu</span></button><a className="nkc-logo" href="#top" aria-label="Nederlands KennisCentrum"><strong>NKC</strong><span>Nederlands<br />KennisCentrum</span></a><button className="user-menu" type="button"><span className="user-dot">M</span><span>Martin Bronger<br /><small>ABCm</small></span><ChevronDown size={15} /></button></div></header>
+    <header className="site-header"><div className="header-inner"><button className="menu-button" type="button"><Menu size={20} /> <span>Menu</span></button><a className="nkc-logo" href="#top" aria-label="Nederlands KennisCentrum"><strong>NKC</strong><span>Nederlands<br />KennisCentrum</span></a><button className="user-menu" type="button"><span className="user-dot">{audience === "advisor" ? "D" : "M"}</span><span>{audience === "advisor" ? <>Dave<br /><small>NKC adviseur</small></> : <>Martin Bronger<br /><small>ABCm</small></>}</span><ChevronDown size={15} /></button></div></header>
   </>;
 }
 
-function WorkspaceControls({ mode, onModeChange }) {
+function WorkspaceControls({ mode, onModeChange, audience, onAudienceChange }) {
   return <section className="workspace-controls" aria-label="Dossierregie en voortgang">
-    <div className="regie-choice">
-      <span>Regie</span>
-      <div className="segmented-control" role="group" aria-label="Kies de regievorm">
-        <button className={mode === "eigen" ? "selected" : ""} type="button" onClick={() => onModeChange("eigen")}>Eigen regie</button>
-        <button className={mode === "nkc" ? "selected" : ""} type="button" onClick={() => onModeChange("nkc")}>NKC regie</button>
+    <div className="workspace-topline">
+      <div className="view-choice"><span>Weergave</span><div className="segmented-control" role="group" aria-label="Kies de gebruikersrol"><button className={audience === "supplier" ? "selected" : ""} type="button" onClick={() => onAudienceChange("supplier")}>Leverancier</button><button className={audience === "advisor" ? "selected" : ""} type="button" onClick={() => onAudienceChange("advisor")}>NKC adviseur</button></div></div>
+      <div className="regie-choice">
+        <span>Regie</span>
+        <div className="segmented-control" role="group" aria-label="Kies de regievorm">
+          <button className={mode === "eigen" ? "selected" : ""} type="button" onClick={() => onModeChange("eigen")}>Eigen regie</button>
+          <button className={mode === "nkc" ? "selected" : ""} type="button" onClick={() => onModeChange("nkc")}>NKC regie</button>
+        </div>
       </div>
-    </div>
-    <div className="process-steps" aria-label="Voortgang van het dossier">
-      <span className="done"><CheckCircle2 size={17} /> Intake</span>
-      <span className="active"><Clock3 size={17} /> Marktscan</span>
-      <span>Kennismakingen</span>
-      <span>Besluit</span>
+      <div className="process-steps" aria-label="Voortgang van het dossier">
+        <span className="done"><CheckCircle2 size={17} /> Intake</span>
+        <span className="active"><Clock3 size={17} /> Marktscan</span>
+        <span>Kennismakingen</span>
+        <span>Besluit</span>
+      </div>
     </div>
     <p className="regie-explanation">{mode === "eigen" ? "De klant beheert de longlist en shortlist. NKC bewaakt afspraken en helpt waar nodig." : "NKC beheert de longlist en shortlist. De klant beoordeelt en bevestigt de vervolgstappen."}</p>
   </section>;
@@ -85,9 +88,20 @@ function DossierCard() {
   </section>;
 }
 
-function CollaborationCard() {
+function CollaborationCard({ audience }) {
   const [composerOpen, setComposerOpen] = useState(false);
   const [recipient, setRecipient] = useState("aanvrager");
+  if (audience === "advisor") return <section className="collaboration-card advisor-communication-card">
+    <div className="collaboration-heading"><div><h2>Communicatie in dit dossier</h2><p>Aanvrager en gekoppelde leveranciers op een plek.</p></div><button className="outline-button compact-action" type="button"><MessageSquare size={17} /> Nieuwe update</button></div>
+    <section className="advisor-applicant-thread"><div className="questions-heading"><div><h3>Gesprek met de aanvrager</h3><p><span className="participant-stack"><span>K</span><span>N</span></span> Klimwandspecialist en NKC</p></div><span className="conversation-presence">Actief</span></div><div className="conversation-message outgoing"><span className="message-avatar">N</span><div><div className="message-meta"><b>NKC</b><time>Vandaag, 09:48</time></div><p>We hebben de briefing aangevuld met de gewenste voorraad- en planningsfunctionaliteiten.</p></div></div><div className="conversation-message incoming"><span className="message-avatar">K</span><div><div className="message-meta"><b>Klimwandspecialist</b><time>Vandaag, 11:08</time></div><p>Akkoord. Deze versie kan gebruikt worden voor de eerste leveranciersgesprekken.</p></div></div></section>
+    <section className="supplier-conversations" aria-label="Leveranciersgesprekken"><div className="questions-heading"><div><h3>Leveranciersgesprekken</h3><p>Iedere leverancier ziet alleen het eigen gesprek en de goedgekeurde briefing.</p></div><span className="conversation-presence">5 gekoppeld</span></div>{[
+      ["Leverancier 01", "ERP voor projectbedrijven", "Vraagt om aanvullende informatie over de voorraadplanning.", "Vandaag, 10:42", "Beantwoord vraag"],
+      ["Leverancier 02", "Voorraad & logistiek", "Heeft de briefing ontvangen en beoordeelt de match.", "Vandaag, 09:57", "Wacht op reactie"],
+      ["Leverancier 03", "ERP voor MKB", "Deelt twee relevante referentiecases.", "Gisteren, 16:20", "Bekijk bijlagen"],
+      ["Leverancier 04", "Projectadministratie", "Wil een kennismaking inplannen met de aanvrager.", "Gisteren, 14:05", "Plan kennismaking"],
+      ["Leverancier 05", "CRM & service", "Heeft een vervolgvraag over certificering en onderhoud.", "maandag, 11:31", "Beantwoord vraag"],
+    ].map(([name, focus, message, time, action]) => <article className="advisor-supplier-row" key={name}><span className="supplier-avatar">{name.slice(-2)}</span><div><b>{name}</b><small>{focus}</small><p>{message}</p><time>{time}</time></div><button className="text-action" type="button">{action} <ArrowRight size={15} /></button></article>)}</section>
+  </section>;
   return <section className="collaboration-card">
     <div className="collaboration-heading"><div><h2>Dossiergesprekken</h2><p>Vragen en antwoorden rond dossier 1116103.</p></div><button className="outline-button compact-action" type="button" onClick={() => setComposerOpen((isOpen) => !isOpen)}><MessageSquare size={17} /> {composerOpen ? "Sluiten" : "Nieuwe vraag"}</button></div>
     <section className="dossier-questions" aria-label="Dossiergesprekken">
@@ -111,16 +125,16 @@ function CollaborationCard() {
   </section>;
 }
 
-function MainContent({ mode }) {
-  return <div className="left-column"><ProfileCard /><DossierCard /><CollaborationCard /></div>;
+function MainContent({ mode, audience }) {
+  return <div className="left-column"><ProfileCard /><DossierCard /><CollaborationCard audience={audience} /></div>;
 }
 
-function Sidebar({ mode }) {
+function Sidebar({ mode, audience }) {
   const [generalQuestionOpen, setGeneralQuestionOpen] = useState(false);
   const [readyForMeetings, setReadyForMeetings] = useState(false);
   const [reminderSent, setReminderSent] = useState(false);
   return <aside className="sidebar advisor-sidebar">
-    <section className="next-action-card"><div className="side-heading"><h2>Volgende actie</h2><Clock3 size={19} /></div><p>Bevestig de gewenste functionaliteiten</p><dl><div><dt>Eigenaar</dt><dd>{mode === "eigen" ? "Klant" : "NKC"}</dd></div><div><dt>Deadline</dt><dd>Over 8 dagen</dd></div><div><dt>Status</dt><dd><span className="status-chip waiting">Wacht op {mode === "eigen" ? "klant" : "NKC"}</span></dd></div></dl><div className="action-button-row"><button className="outline-button" type="button">Open actie <ArrowRight size={17} /></button><button className={reminderSent ? "reminder-button sent" : "reminder-button"} type="button" onClick={() => setReminderSent(true)}>{reminderSent ? "Herinnering verstuurd" : "Stuur herinnering"}</button></div></section>
+    <section className="next-action-card"><div className="side-heading"><h2>Volgende actie</h2><Clock3 size={19} /></div><p>{audience === "advisor" ? "Deel de definitieve briefing met de leveranciers" : "Bevestig de gewenste functionaliteiten"}</p><dl><div><dt>Eigenaar</dt><dd>{audience === "advisor" ? "NKC" : mode === "eigen" ? "Klant" : "NKC"}</dd></div><div><dt>Deadline</dt><dd>Over 8 dagen</dd></div><div><dt>Status</dt><dd><span className="status-chip waiting">{audience === "advisor" ? "2 reacties ontvangen" : `Wacht op ${mode === "eigen" ? "klant" : "NKC"}`}</span></dd></div></dl><div className="action-button-row"><button className="outline-button" type="button">Open actie <ArrowRight size={17} /></button><button className={reminderSent ? "reminder-button sent" : "reminder-button"} type="button" onClick={() => setReminderSent(true)}>{reminderSent ? "Herinnering verstuurd" : "Stuur herinnering"}</button></div></section>
     <section className="dossier-agreements-card"><div className="side-heading"><h2>Afspraken &amp; voortgang</h2><ClipboardList size={19} /></div><dl><div><dt>Huidige fase</dt><dd>Marktscan door NKC</dd></div><div><dt>Communicatie</dt><dd>Via Selectiehulp</dd></div><div><dt>Kennismakingen</dt><dd>NKC plant en begeleidt</dd></div></dl><p>Leveranciers ontvangen alleen de goedgekeurde dossierinformatie.</p></section>
     <section className="dossier-actions-card"><div className="side-heading"><h2>Dossieracties</h2><ClipboardList size={19} /></div><div className="sidebar-action-list"><article><span className="collab-icon"><MessageCircle size={19} /></span><div><b>Gesprekken</b><p>2 gesprekken vragen om reactie</p><small>Laatste bericht vandaag</small></div><ChevronRight size={18} /></article><article><span className="collab-icon"><FileText size={19} /></span><div><b>Bestanden</b><p>Briefing en huidige situatie</p><small>Alleen zichtbaar voor betrokkenen</small></div><ChevronRight size={18} /></article><article><span className="collab-icon"><Users size={19} /></span><div><b>Volgende afspraak</b><p>Plan een kennismaking</p><small>Nog niet ingepland</small></div><ChevronRight size={18} /></article></div></section>
     <section className="dossier-update-card"><div className="side-heading"><h2>Dossierupdate</h2><FileText size={19} /></div><p><b>{readyForMeetings ? "Klaar voor kennismakingen" : "Werkversie"}</b><small>Laatst bijgewerkt vandaag om 11:08</small></p><button className={readyForMeetings ? "ready-button active" : "ready-button"} type="button" onClick={() => setReadyForMeetings((ready) => !ready)}>{readyForMeetings ? "Definitieve versie gedeeld" : "Markeer als definitief"}</button><button className="text-action" type="button">Stuur dossierupdate</button></section>
@@ -137,5 +151,6 @@ function Footer() {
 
 export function App() {
   const [mode, setMode] = useState("eigen");
-  return <div id="top"><Header /><main><div className="breadcrumb"><span>⌂</span><ChevronRight size={14} /> Klimwandspecialist</div><WorkspaceControls mode={mode} onModeChange={setMode} /><div className="page-grid"><MainContent mode={mode} /><Sidebar mode={mode} /></div></main><Footer /></div>;
+  const [audience, setAudience] = useState("supplier");
+  return <div id="top"><Header audience={audience} /><main><div className="breadcrumb"><span>⌂</span><ChevronRight size={14} /> Klimwandspecialist</div><WorkspaceControls mode={mode} onModeChange={setMode} audience={audience} onAudienceChange={setAudience} /><div className="page-grid"><MainContent mode={mode} audience={audience} /><Sidebar mode={mode} audience={audience} /></div></main><Footer /></div>;
 }
